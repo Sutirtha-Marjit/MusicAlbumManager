@@ -1,0 +1,19 @@
+<div class="bg">
+    <div class="inner-bg" style="background-image:url('./assets/bg.jpg')">
+        
+    </div>
+</div>
+<div class="bg-dark" style="width:100%; position:fixed; top:0px; left:0px; z-index: 300;">
+    <div class="container-fluid">
+        <div class="btn-group">
+            <button class="btn btn-dark" routerLink="welcome">Welcome</button>
+            <button class="btn btn-dark" routerLink="fileselection">Select</button>
+            <!-- <button class="btn btn-dark" routerLink="edit">Tag Editor</button> -->
+        </div>
+    </div>
+</div>
+
+<br/>
+<div class="router-outlet-wrap">    
+<router-outlet (activate)='onActivate($event)'></router-outlet>
+</div>

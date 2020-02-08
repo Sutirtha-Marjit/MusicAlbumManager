@@ -1,0 +1,46 @@
+<div class="container-fluid text-light page-content">
+    <form>
+        <div class="row">
+            <div class="col-md-2" style="text-align: right;">
+                <strong>Select music folder</strong>
+            </div>
+            <div class="col-md-8">
+                <input [(ngModel)]="dirPath" type="text" name="path_{{ranID}}" id="path_{{ranID}}" class="form-control form-control-sm"/>
+            </div>
+            <div class="col-md-1">
+                <button (click)="getDirectoryDetails()" class="btn btn-block btn-sm btn-light">Populate</button>    
+            </div>
+            <div class="col-md-1">
+                <button *ngIf="listForNext.length>0" (click)="goNext()" class="btn btn-outline-light btn-sm">Next</button>
+            </div>
+        </div>
+        <hr class="bg-light" *ngIf="!(mp3list && mp3list.length>0)"/>
+        <br/>
+        <div class="row" *ngIf="mp3list && mp3list.length>0">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                <button *ngIf="listForNext.length!==mp3list.length" class="btn btn-sm btn-dark" (click)="selectAll()">Select all {{mp3list.length}} files</button>
+                                <button *ngIf="listForNext.length===mp3list.length" class="btn btn-sm btn-dark" (click)="deselectAll()">Deselect all {{mp3list.length}} files</button>
+                            </th>
+                            <th>file</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-light" *ngFor="let item of mp3list">
+                            <td>{{item.id}}</td>
+                            <td><input type="checkbox" name="ch_{{item.serial}}" [(ngModel)]="item.selected" (change)="selectionChangeReflect($event)"/></td>
+                            <td>{{item.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+           
+        </div>
+        
+    </form>
+</div>

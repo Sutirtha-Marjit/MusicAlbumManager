@@ -1,0 +1,82 @@
+<div class="page-content">
+<audio autoplay="true" [src]="currentAudio"  id="player" style="width: 100%;" controls="true" *ngIf="currentAudio" title="{{currentAudio}}"></audio>
+
+<table class="table table-striped">
+    <thead class="text-light">
+        <tr>
+            <th>#</th>
+            <th>title</th>
+            <th>File Name</th>
+            <th>Path</th>
+            <th>Track</th>
+            <th>Album</th>
+            <th>Encoding</th>
+            <th>Art</th>
+            
+            <th>Artist</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <thead class="bg-dark">
+        <tr>
+            <th>#</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><button class="btn btn-sm btn-outline-light" (click)="arrangeTracks()">Arrange</button></th>
+            <th>
+                <form name="album_edit_form">
+                <input name="album_edit_form_input" type="text" class="form-control form-control-sm" [(ngModel)]="batchUpdate.album"/>
+                <button (click)="updateBatch('album')" style="width:20px; display: none;" class="btn btn-sm btn-light">.</button>
+                </form>
+            </th>
+            <th></th>
+            <th></th>
+            <th>
+                <form name="artist_edit_form">
+                <input name="artist_edit_form_input" type="text" class="form-control form-control-sm" [(ngModel)]="batchUpdate.artist" />
+                <button (click)="updateBatch('artist')" style="width:20px; display: none;" class="btn btn-sm btn-light">.</button>
+                </form>
+            </th>
+            <th></th>
+            <th><button class="btn btn-sm btn-light" (click)="saveAll()">Save all</button></th>
+            <th><button class="btn btn-outline-light btn-sm" (click)="loadAll()">Load all</button></th>
+        </tr>
+    </thead>
+    <tbody style="position:relative; width:100%; height:450px; overflow-y: auto;">
+        <tr *ngFor="let item of currentSelectedList">
+            <td class="text-light">{{item.id}}</td>
+            <td>
+            <input *ngIf="item.tags && item.tags.title" type="text" class="form-control form-constrol-sm form-control-edit-text" name="title_{{item.id}}" [(ngModel)]="item.tags.title"/>
+            </td>
+            <td class="text-light"><small class="cut-text" title="{{item.name}}">{{item.name}}</small></td>
+            <td class="text-light"><small *ngIf="item.tags" class="cut-text" title="{{item.absolutePath}}">{{item.absolutePath}}</small></td>
+            <td>
+                <input *ngIf="item.tags" type="text" class="form-control form-control-sm" style="width:50px;" name="tags_{{item.id}}" [(ngModel)]="item.tags.trackNumber"/>                
+            </td>
+            <td>
+                <input *ngIf="item.tags && item.tags.album" type="text" class="form-control form-constrol-sm form-control-edit-text" name="album{{item.id}}" [(ngModel)]="item.tags.album"/>
+            </td>
+            <td><small *ngIf="item.tags" class="cut-text text-light">{{item.tags.encodingTechnology}}</small></td>
+            <td>
+                <musicapp-image-upload-control
+                *ngIf="item.tags"
+                [currentImaageSource]="requestImage(item.absolutePath)"
+                ></musicapp-image-upload-control>
+            </td>
+            <td>
+                <input *ngIf="item.tags && item.tags.performerInfo" type="text" class="form-control form-constrol-sm form-control-edit-text" name="artist{{item.id}}" [(ngModel)]="item.tags.performerInfo"/>
+            </td>
+            <td><button class="btn btn-sm btn-dark" (click)="requestAudio(item.absolutePath)">Play</button></td>
+            <td><button *ngIf="item.tags && item.tags.title" (click)="save(item.id)" class="btn btn-sm btn-success">Save</button></td>
+            <td>
+                <button style="width:100px" class="btn btn-sm btn-dark" (click)="getTagDetails(item.absolutePath,item.id)">
+                   <span class="loader" *ngIf="progress[item.id] && progress[item.id]==='progress'"></span> &nbsp;Load
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

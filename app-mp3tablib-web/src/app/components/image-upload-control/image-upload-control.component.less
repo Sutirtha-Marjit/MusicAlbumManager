@@ -1,0 +1,33 @@
+.image-uploader-wrap{
+    position: relative;
+    width:60px;
+    height:60px;
+    .upload-button-wrap{
+       
+       width: 100%;
+       height: 100%;
+       position: relative;       
+       z-index: 9;
+
+       input{
+           width: 100%;
+           height: 100%;
+           opacity: 0;
+           cursor: pointer;
+       }
+    }
+    .image-wrap{
+        position: absolute;
+        left: 0px;;
+        top:0px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: #c3c3c3;
+        img{
+            width: auto;
+            height: 100%;
+        }
+    }
+}

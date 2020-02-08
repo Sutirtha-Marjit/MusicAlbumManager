@@ -1,0 +1,29 @@
+body,html{
+    *{
+        font-family: 'PT Sans Narrow', sans-serif;
+        &.stylish{
+            font-family: 'Dancing Script', cursive;
+        }
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-family: 'PT Sans Narrow', sans-serif;
+        font-weight: normal;
+        
+    }
+
+    .page-content{
+        animation: appear 0.5s ease-out 0s;
+    }
+}
+
+@keyframes appear{
+    0%{
+        opacity: 0;
+        transform: translateY(20%);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
