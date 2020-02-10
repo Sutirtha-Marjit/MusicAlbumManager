@@ -13,6 +13,7 @@ class DirectoryView{
                         const crPath = `${dirPath}\\${fObj}`;
                         const stats = fs.lstatSync(crPath);
                         if(stats.isFile() && filterExtensions.length>0){
+                           console.log(stats); 
                            const got = filterExtensions.find((ext)=>{
                                 return fObj.indexOf(ext)!==-1
                             });

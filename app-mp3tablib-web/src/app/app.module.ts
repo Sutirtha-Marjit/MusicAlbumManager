@@ -11,6 +11,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { TagEditorWindowComponent } from './components/tag-editor-window/tag-editor-window.component';
 import { ImageUploadControlComponent } from './components/image-upload-control/image-upload-control.component';
+import { ImageExplorerComponent } from './components/image-explorer/image-explorer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ImageUploadControlComponent } from './components/image-upload-control/i
     PreloaderComponent,
     WelcomePageComponent,
     TagEditorWindowComponent,
-    ImageUploadControlComponent
+    ImageUploadControlComponent,
+    ImageExplorerComponent
   ],
   imports: [
     BrowserModule,

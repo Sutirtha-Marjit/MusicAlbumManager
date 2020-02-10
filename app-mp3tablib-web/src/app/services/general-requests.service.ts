@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +10,10 @@ export class GeneralRequestsService {
   private sessionName = 'musicappSession';
   constructor(private $http:HttpClient) { 
 
+  }
+
+  public getDrives(){
+    return this.$http.get(`${this.getLocalAPIRoot()}/drives`);
   }
 
   public recentlyUsedDirectories(val=null){
@@ -51,6 +56,13 @@ export class GeneralRequestsService {
     }
   }
 
+  requestImageAbsolute(path:string){
+
+    const url = `${this.getLocalAPIRoot()}/photo/request/${btoa(path)}`;
+    return url;
+    
+  }
+
   public requestImage(path:string){
     if(path){
       const pathTorequest = window.btoa(path);
@@ -58,6 +70,10 @@ export class GeneralRequestsService {
       
       return url;
     }
+  }
+
+  public getImageList(){
+    return this.$http.get(`${this.getLocalAPIRoot()}/directory/image/list`);
   }
 
   public getDirectoryDetails(path:string){

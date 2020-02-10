@@ -49,8 +49,8 @@ class TagLibManagement {
 
     static updateTags(fileName, userProvidedTags) {
 
-        const {title,album,performerInfo} = userProvidedTags;
-        const updatedTags = {title,album,performerInfo};
+        const {title,album,performerInfo,trackNumber} = userProvidedTags;
+        const updatedTags = {title,album,performerInfo,trackNumber};
         return new Promise((resolve,reject)=>{
             
             fs.stat(fileName,(err, stats)=>{

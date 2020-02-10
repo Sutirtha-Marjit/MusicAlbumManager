@@ -8,6 +8,7 @@ import { Component, OnInit , Input, Output, EventEmitter, OnChanges} from '@angu
 export class ImageUploadControlComponent implements OnInit, OnChanges {
 
   @Input() currentImaageSource=null;
+  @Output() onImageSelector = new EventEmitter<any>();
   editedImageData=null;
   constructor() { 
 
@@ -15,6 +16,10 @@ export class ImageUploadControlComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes){
     
+  }
+
+  openImageSelector(){
+    this.onImageSelector.emit({});
   }
 
   showData(){

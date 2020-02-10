@@ -33,7 +33,7 @@
                 </form>
             </th>
             <th></th>
-            <th></th>
+            <th><img (click)="onImageSelector()" style="width:35px; height:auto; cursor:pointer" src="../../assets/photos.png"/></th>
             <th>
                 <form name="artist_edit_form">
                 <input name="artist_edit_form_input" type="text" class="form-control form-control-sm" [(ngModel)]="batchUpdate.artist" />
@@ -64,6 +64,7 @@
                 <musicapp-image-upload-control
                 *ngIf="item.tags"
                 [currentImaageSource]="requestImage(item.absolutePath)"
+                (onImageSelector)="onImageSelector(item.id)"
                 ></musicapp-image-upload-control>
             </td>
             <td>
@@ -80,3 +81,4 @@
     </tbody>
 </table>
 </div>
+<musicapp-image-explorer [imageDirPath]="imageDirPath" (close)="onModalClose()" *ngIf="imageExplorerOpen"></musicapp-image-explorer>

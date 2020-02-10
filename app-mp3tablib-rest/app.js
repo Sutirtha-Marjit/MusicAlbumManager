@@ -12,6 +12,11 @@ const TagLibManagement = require('./engine/taglib.update');
 const fs = require('fs');
 const wallPaperURL = 'https://hips.hearstapps.com/rbk.h-cdn.co/assets/cm/14/51/548fc40f14fc2_-_rbk-50-easy-ways-to-feel-sexy-listening-to-music-s2.jpg';
 
+
+const dirAnalysis = (req,res,filters)=>{
+
+};
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -34,14 +39,21 @@ app.get(`${apiRoot}`,(req,res)=>{
     res.json(r);
 });
 
+app.get(`${apiRoot}drives`,(req,res)=>{
+    const r = getBlankResultObject();
+    r.data = ['C:','E:','F:','G:'];
+
+    res.json(r);
+});
+
 app.get(`${apiRoot}audio/request/:audiopathEncripted`,(req,res)=>{
     const audioPath = atob(req.params.audiopathEncripted);
     res.sendFile(audioPath);
 });
 
 app.get(`${apiRoot}photo/request/:imagepathEncripted`,(req,res)=>{
-    const audioPath = atob(req.params.imagepathEncripted);
-    res.sendFile(audioPath);
+    const photoPath = atob(req.params.imagepathEncripted);
+    res.sendFile(photoPath);
 });
 
 app.get(`${apiRoot}wallpaper/main`,(req,res)=>{
@@ -143,7 +155,7 @@ app.get('/test',(req,res)=>{
     res.sendFile(url);
 });
 
-app.get(`${apiRoot}directory/info`,(req,res)=>{
+app.get(`${apiRoot}directory/image/list`,(req,res)=>{
     DirectoryView.getView('C:\\Users\\Sutirtha\\Pictures',['.jpg']).then((data)=>{
         res.json(data);
     }).catch((erroData)=>{

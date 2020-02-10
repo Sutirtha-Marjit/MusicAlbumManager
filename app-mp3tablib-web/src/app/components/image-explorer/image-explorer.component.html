@@ -1,0 +1,32 @@
+<div class="modal fade" style="display:block; opacity:1; background:rgba(2, 2, 2, 0.7);">
+    <div class="modal-dialog" role="document" style="width:90%; margin-top:90px">
+        <div class="modal-content" >
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLiveLabel">Select image</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ng-container [ngTemplateOutlet]="filelist"></ng-container>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark btn-sm">Done</button>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+<ng-template #filelist>
+    <div class="container-fluid" style="height:300px; overflow-y: auto;">
+      <div class="row" *ngIf="imageList">
+        <ng-container *ngFor="let item of imageList">
+          <div class="col-md-3" *ngIf="!item.dir">
+            <img class="image" [src]="getImagePath(item.name)"/>
+            <div>{{((item.size)/1024)}}KB</div>
+          </div>  
+        </ng-container>        
+      </div>
+    </div>
+</ng-template>

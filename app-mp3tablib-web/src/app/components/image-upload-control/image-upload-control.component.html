@@ -2,8 +2,8 @@
     <div class="image-wrap">
         <img *ngIf="currentImaageSource" [src]="currentImaageSource" alt="album art"/>
     </div>
-    <div class="upload-button-wrap">
-       <input (change)="showData()" [(ngModel)]="editedImageData" type="file" name="file"/> 
+    <div class="upload-button-wrap" (click)="openImageSelector()">
+       <!-- <input (change)="showData()" [(ngModel)]="editedImageData" type="file" name="file"/>  -->
     </div>
 </div>
 <span>{{this.editedImageData}}</span>
