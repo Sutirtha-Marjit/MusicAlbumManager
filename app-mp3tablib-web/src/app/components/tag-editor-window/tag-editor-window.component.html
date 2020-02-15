@@ -64,7 +64,7 @@
                 <musicapp-image-upload-control
                 *ngIf="item.tags"
                 [currentImaageSource]="requestImage(item.absolutePath)"
-                (onImageSelector)="onImageSelector(item.id)"
+                (onImageSelector)="onImageSelector()"
                 ></musicapp-image-upload-control>
             </td>
             <td>
@@ -81,4 +81,4 @@
     </tbody>
 </table>
 </div>
-<musicapp-image-explorer [imageDirPath]="imageDirPath" (close)="onModalClose()" *ngIf="imageExplorerOpen"></musicapp-image-explorer>
+<musicapp-image-explorer [imageDirPath]="imageDirPath" (selectedImageObj)="onSelectedImageObj($event)" (close)="onModalClose()" *ngIf="imageExplorerOpen"></musicapp-image-explorer>

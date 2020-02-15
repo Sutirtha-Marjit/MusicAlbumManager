@@ -129,6 +129,17 @@ app.post(`${apiRoot}get/tags`,(req,res)=>{
     }    
 });
 
+app.post(`${apiRoot}update/albumart`,(req,res)=>{
+    const r = getBlankResultObject();
+    TagLibManagement.updateAlbumArtBatch(req.body.albumartFile,req.body.listOfFilePaths,(successData)=>{
+        r.data = successData;
+        res.json(r);
+    });
+
+});
+
+
+
 app.post(`${apiRoot}update/tags/:mode`,(req,res)=>{  
     
     switch(req.params.mode){
@@ -151,8 +162,10 @@ app.post(`${apiRoot}update/tags/:mode`,(req,res)=>{
 });
 
 app.get('/test',(req,res)=>{
-    const url = `${__dirname}/default.image.png`;
-    res.sendFile(url);
+    const albumartFile = 'C:\\Users\\Sutirtha\\Pictures\\Albumarts\\album-art-6.jpg';
+    const musicFile= 'G:\Behen Ki Shaadi Raju Shrivastav.mp3';
+    TagLibManagement.updateAlbumArt(albumartFile,musicFile);
+    res.json({});
 });
 
 app.get(`${apiRoot}directory/image/list`,(req,res)=>{

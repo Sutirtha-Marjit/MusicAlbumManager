@@ -20,6 +20,46 @@ class TagLibManagement {
         return pr;
     }
 
+    static updateAlbumArtBatch(albumartFile,listOfFilePaths,callback){
+       let count=0;
+       const albumartData = fs.readFileSync(albumartFile);
+       const onComplete = ()=>{
+        count++;
+        console.log(`albumart updated ${Math.ceil((count/listOfFilePaths.length)*100)}`);
+        if(count===listOfFilePaths.length){
+            console.log('Albumart batch update complete');
+            callback({});
+        }
+       };       
+
+       listOfFilePaths.forEach((path)=>{
+          this.updateAlbumArt(albumartFile,path,albumartData).then(onComplete).catch(onComplete);
+       });
+
+    }
+
+    static updateAlbumArt(albumartFile,musicFile,bufferData=null){
+
+        let albumartData = bufferData ? bufferData : fs.readFileSync(albumartFile);
+
+        const pr = new Promise((resolve,reject)=>{
+            const updatedTags = {
+                image:{
+                    mime:'jpg',
+                    type:{
+                        id:3,
+                        name:'front cover'
+                    },
+                    imageBuffer:albumartData    
+                }
+            };
+            const success = NodeID3.update(updatedTags,musicFile);
+            success ? resolve(updatedTags) : reject(updatedTags);
+        });
+        
+        return pr;
+    }
+
     static updateTagsBatch(userProvidedBatchTags){
 
         const statusArr=[];

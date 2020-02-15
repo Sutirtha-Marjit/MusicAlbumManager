@@ -97,4 +97,8 @@ export class GeneralRequestsService {
     return this.$http.post(url,dataToPost);
   }
 
+  public updateAlbumArt(dataToPost){
+    return this.$http.post( `${this.getLocalAPIRoot()}/update/albumart`,dataToPost);
+  }
+
 }

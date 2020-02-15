@@ -11,7 +11,10 @@ export class ImageExplorerComponent implements OnInit {
 
  
   @Input() imageDirPath=null;
+  
   @Output() close = new EventEmitter<any>();
+  @Output() selectedImageObj = new EventEmitter<any>();
+  selectedImg=null;
   imageList=[];
   constructor(private gs:GeneralRequestsService) { 
 
@@ -19,6 +22,17 @@ export class ImageExplorerComponent implements OnInit {
 
   onClose(){
     this.close.emit({});
+  }
+
+  fireImageSelection(){
+    if(window.confirm(this.selectedImg.path)){
+      this.close.emit('close');
+      this.selectedImageObj.emit(this.selectedImg);
+    }
+  }
+
+  setImageSelection(actualPath,path){
+    this.selectedImg = {actualPath,path};
   }
 
   getImagePath(path){

@@ -16,7 +16,7 @@ export class TagEditorWindowComponent implements OnInit, DoCheck, OnChanges {
   imageExplorerOpen = false;
   batchUpdate = { artist: '', album: '' };
   @Input() currentSelectedList: Array<Mp3FileBasicData> = [];
-  imageDirPath = 'C:\\Users\\Sutirtha\\Pictures';
+  imageDirPath = 'C:\\Users\\Sutirtha\\Pictures\\Albumarts';
   constructor(private gs: GeneralRequestsService, private sanitizer: DomSanitizer, private router: Router) { }
 
   public requestAudio(url) {
@@ -49,8 +49,17 @@ export class TagEditorWindowComponent implements OnInit, DoCheck, OnChanges {
     this.imageExplorerOpen = false;
   }
 
-  onImageSelector(objID) {
+  onImageSelector() {
     this.imageExplorerOpen = true;
+  }
+  
+  onSelectedImageObj(ev){
+    const listOfFilePaths=this.currentSelectedList.map((el)=>{
+      return el.absolutePath;
+    });
+    this.gs.updateAlbumArt({albumartFile:ev.path,listOfFilePaths}).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
   saveAll() {
